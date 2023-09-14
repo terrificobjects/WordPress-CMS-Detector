@@ -16,15 +16,25 @@
     <script>
         async function identifyCMS() {
             const url = document.getElementById("url").value;
-            const result = await fetch('http://<site-url-or-localhost/identify', {
+            const response = await fetch('http://<site url/server address>/identify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ url }),
-            })
-            .then(res => res.json())
-            .catch(error => console.error('Error:', error));
+            });
+            
+            const result = await response.json();
+
+            if (response.status === 429) {
+                alert(result.message || "Rate limit exceeded. You must wait 1 hour after making 20 requests to make more.");
+                return;
+            }
+
+            if (result.error) {
+                console.error('Error:', result.error);
+                return;
+            }
 
             if (result) {
                 document.getElementById("isWordPress").innerText = result.isWordPress ? "IS" : "IS NOT";
