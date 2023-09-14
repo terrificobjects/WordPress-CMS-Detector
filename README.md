@@ -14,3 +14,7 @@ Then, run ```npm install express cors node-fetch node-html-parser```<br>
 If you're using UFW, run ```sudo ufw allow 3000/tcp```<br>
 Once you've set up the project, run it with ```node app.js```<br>
 
+You can use curl from the command line to check if this is working:
+
+```curl -X POST -H "Content-Type: application/json" -d '{"url": "https://example.com"}' http://localhost:3000/identify```
+
