@@ -19,7 +19,7 @@ app.use(express.json());
 
 // POST /identify endpoint
 app.post('/identify', async (req, res) => {
-	const ip = req.headers['x-forwarded-for'] || req.ip;
+	const ip = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.ip;
     const currentTime = Date.now();
 
     // Check if this IP has made a request before
