@@ -4,8 +4,8 @@ A very generic "Is this WordPress?" detector written in node.js and HTML. Tested
 ## To Install:
 
 ### Required:
-node.js 19+
-NPM packages: express, cors, node-fetch, node-html-parser
+node.js 19+<br>
+NPM packages: express, cors, node-fetch, node-html-parser<br>
 
 ### Install commands
 
