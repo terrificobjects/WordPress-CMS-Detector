@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CMS Identifier</title>
+</head>
+<body>
+    <h1>Identify WordPress Website</h1>
+    <label for="url">Enter URL: </label>
+    <input type="text" id="url" placeholder="https://example.com">
+    <button onclick="identifyCMS()">Identify</button>
+    <p>Result:</p>
+    <p>This site <span id="isWordPress"></span> running on WordPress.</p>
+    <p>The WordPress version is <span id="version"></span>.</p>
+    <p>The WordPress theme is <span id="theme"></span>.</p>
+
+    <script>
+        async function identifyCMS() {
+            const url = document.getElementById("url").value;
+            const result = await fetch('http://detector.recodewordpress.com/identify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url }),
+            })
+            .then(res => res.json())
+            .catch(error => console.error('Error:', error));
+
+            if (result) {
+                document.getElementById("isWordPress").innerText = result.isWordPress ? "IS" : "IS NOT";
+                document.getElementById("version").innerText = result.version || "Unknown";
+                document.getElementById("theme").innerText = result.theme || "Unknown";
+            }
+        }
+    </script>
+</body>
+</html>
